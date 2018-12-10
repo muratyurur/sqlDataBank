@@ -46,6 +46,8 @@ class Users extends CI_Controller
 
     public function save()
     {
+        $user = $this->session->userdata("user");
+
         /** Load Form Validation Library */
         $this->load->library("form_validation");
 
@@ -119,7 +121,8 @@ class Users extends CI_Controller
                         "password" => md5($this->input->post("password")),
                         "img_url" => $uploaded_file,
                         "isActive" => 1,
-                        "createdAt" => date("Y-m-d H:i:s")
+                        "createdAt" => date("Y-m-d H:i:s"),
+                        "createdBy" => $user->id
                     )
                 );
 
@@ -213,6 +216,8 @@ class Users extends CI_Controller
 
     public function update($id)
     {
+        $user = $this->session->userdata("user");
+
         /** Load Form Validation Library */
         $this->load->library("form_validation");
 
@@ -285,7 +290,9 @@ class Users extends CI_Controller
                         "full_name" => $this->input->post("full_name"),
                         "title"     => $this->input->post("title"),
                         "email"     => $this->input->post("email"),
-                        "img_url"   => $uploaded_file
+                        "img_url"   => $uploaded_file,
+                        "updatedAt" => date("Y-m-d H:i:s"),
+                        "updatedBy" => $user->id
                     );
 
                     /** If Upload Process is Unsuccesful */
@@ -308,7 +315,9 @@ class Users extends CI_Controller
                     "user_name" => $this->input->post("user_name"),
                     "full_name" => $this->input->post("full_name"),
                     "title" => $this->input->post("title"),
-                    "email" => $this->input->post("email")
+                    "email" => $this->input->post("email"),
+                    "updatedAt" => date("Y-m-d H:i:s"),
+                    "updatedBy" => $user->id
                 );
             }
 

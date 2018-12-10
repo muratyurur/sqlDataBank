@@ -555,10 +555,10 @@
 +function($, window) { 'use strict';
 	window.app.init();
 
-	window.app.menubar.setTheme("dark");
+	window.app.menubar.setTheme("light");
 	window.app.menubar.applyTheme();
 
-    window.app.navbar.setTheme("primary");
+    window.app.navbar.setTheme("purple");
     window.app.navbar.applyTheme();
 
     window.app.saveSettings();

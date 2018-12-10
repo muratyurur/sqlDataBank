@@ -28,7 +28,7 @@
                     </a>
                 </li>
                 <li>
-                    <h5 style="font-size: large;" class="page-title hidden-menubar-top hidden-float">Tuzla Belediyesi Bilgi İşlem Müdürlüğü</h5>
+                    <h5 style="font-size: small;" class="text-muted page-title hidden-menubar-top hidden-float">&copy; Tuzla Belediyesi Bilgi İşlem Müdürlüğü | <?php echo date('Y') ?></h5">
                 </li>
             </ul>
 
@@ -43,7 +43,12 @@
                                      style="display: inline; width: 40px; height: 40px;"
                                 />
                         </div>
-                        <span style="font-size: larger; margin-left: 0px"><?php echo $user->full_name; ?> <p class="text-muted" style="display: inline; font-size: small"><?php echo $user->title; ?></p>
+                        <span style="font-size: larger; margin-left: 0px"><?php echo $user->full_name; ?>
+                            <p class="text-muted" style="display: inline; font-size: small">
+                                <?php echo $user->title; ?>
+                                 &nbsp;<i class="menu-caret zmdi zmdi-hc-lg zmdi-chevron-down"></i>
+                            </p>
+
                     </a>
                     <ul class="dropdown-menu animated flipInY">
                         <li><a style="padding: 10px 16px" href="<?php echo base_url("users/update_form/$user->id"); ?>"><i class="zmdi m-r-md zmdi-hc-lg zmdi-face"></i>Kullanıcı Bilgilerim</a></li>

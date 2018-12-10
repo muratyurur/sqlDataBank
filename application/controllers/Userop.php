@@ -180,9 +180,10 @@ class Userop extends CI_Controller
 
                 $temp_password = random_string();
 
-                $send = send_email($user->email, "Yönetim Paneli Geçici Şifre", "Yönetim Paneline giriş yapabilmeniz için geçici şifreniz: <br><br> 
+                $send = send_email($user->email, "SQL Veri Bankası Geçici Şifre", "<b>SQL Veri Bankası</b> uygulamasına giriş yapabilmeniz için geçici şifreniz: <br><br> 
                                         <span style='font-weight: bold; color: tomato'>$temp_password</span><br><br>
-                                        Geçici şifreniz ile giriş yaptıktan sonra şifrenizi değiştirmeyi unutmayın...");
+                                        Geçici şifreniz ile giriş yaptıktan sonra şifrenizi değiştirmeyi unutmayın... Uygulamaya ulaşmak için 
+                                        <a href='https://sql.muratyurur.com/'>tıklayınız</a>");
 
                 if ($send) {
 

@@ -45,6 +45,21 @@ function get_active_user()
         return false;
 }
 
+function get_username($id)
+{
+    $t = &get_instance();
+
+    $t->load->model("user_model");
+
+    $user = $t->user_model->get(
+        array(
+            "id"    => $id
+        )
+    );
+
+    return($user->full_name);
+}
+
 function send_email($toEmail = "", $subject = "", $message = "")
 {
     $t = get_instance();
