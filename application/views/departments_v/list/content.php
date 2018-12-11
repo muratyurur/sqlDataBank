@@ -29,7 +29,7 @@
                     <th class="w200">Kayıt Tarihi</th>
                     <th class="w100">Güncelleyen</th>
                     <th class="w200">Güncelleme Tarihi</th>
-                    <th class="w75">Durumu</th>
+                    <th class="w50">Durumu</th>
                     <th class="w150">İşlem</th>
                     </thead>
                     <tbody>

@@ -1,0 +1,5 @@
+[10-Dec-2018 17:49:33 UTC] PHP Fatal error:  Call to undefined function get_active_department() in /home/wwwmuratyurur/public_html/sql/application/controllers/Departments.php on line 10
+[10-Dec-2018 18:25:52 UTC] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/wwwmuratyurur/public_html/sql/application/controllers/Departments.php on line 91
+[10-Dec-2018 18:25:52 UTC] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/wwwmuratyurur/public_html/sql/application/controllers/Departments.php on line 91
+[10-Dec-2018 18:26:03 UTC] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/wwwmuratyurur/public_html/sql/application/controllers/Departments.php on line 91
+[10-Dec-2018 18:26:05 UTC] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/wwwmuratyurur/public_html/sql/application/controllers/Departments.php on line 91

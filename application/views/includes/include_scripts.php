@@ -7,6 +7,7 @@
 <script src="<?php echo base_url("assets"); ?>/libs/bower/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
 <script src="<?php echo base_url("assets"); ?>/libs/bower/PACE/pace.min.js"></script>
 <script src="<?php echo base_url("assets"); ?>/libs/misc/datatables/datatables.min.js"></script>
+<script src="<?php echo base_url("assets"); ?>/libs/misc/highlight/highlight.pack.js"></script>
 <!-- endbuild -->
 
 <!-- build:js <?php echo base_url("assets"); ?>/assets/js/app.min.js -->

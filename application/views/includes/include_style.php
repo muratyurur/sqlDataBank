@@ -3,6 +3,7 @@
 <!-- build:css /assets/css/app.min.css -->
 <link rel="stylesheet" href="<?php echo base_url("assets"); ?>/libs/bower/animate.css/animate.min.css">
 <link rel="stylesheet" href="<?php echo base_url("assets"); ?>/libs/misc/datatables/datatables.min.css">
+<link rel="stylesheet" href="<?php echo base_url("assets"); ?>/libs/misc/highlight/styles/pojoaque.css">
 <link rel="stylesheet" href="<?php echo base_url("assets"); ?>/libs/bower/fullcalendar/dist/fullcalendar.min.css">
 <link rel="stylesheet" href="<?php echo base_url("assets"); ?>/libs/bower/perfect-scrollbar/css/perfect-scrollbar.css">
 <link rel="stylesheet" href="<?php echo base_url("assets"); ?>/assets/css/bootstrap.css">

@@ -60,6 +60,21 @@ function get_username($id)
     return($user->full_name);
 }
 
+function get_departmentName($id)
+{
+    $t = &get_instance();
+
+    $t->load->model("department_model");
+
+    $department = $t->department_model->get(
+        array(
+            "id"    => $id
+        )
+    );
+
+    return($department->title);
+}
+
 function send_email($toEmail = "", $subject = "", $message = "")
 {
     $t = get_instance();

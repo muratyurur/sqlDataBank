@@ -5,13 +5,13 @@ class Queries extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->viewFolder = "email_settings_v";
+        $this->viewFolder = "queries_v";
 
         if (!get_active_user())
             redirect(base_url("login"));
 
         /** Load Models */
-        $this->load->model("email_model");
+        $this->load->model("query_model");
     }
 
     public function index()
@@ -19,7 +19,7 @@ class Queries extends CI_Controller
         $viewData = new stdClass();
 
         /** Taking all data from the table */
-        $items = $this->email_model->get_all(
+        $items = $this->query_model->get_all(
             array()
         );
 
@@ -36,6 +36,14 @@ class Queries extends CI_Controller
     {
         $viewData = new stdClass();
 
+        $this->load->model("department_model");
+
+        $viewData->departments = $this->department_model->get_all(
+            array(
+                "isActive"  => 1
+            ), "title ASC"
+        );
+
         /** Defining data to be sent to view */
         $viewData->viewFolder = $this->viewFolder;
         $viewData->subViewFolder = "add";
@@ -46,24 +54,19 @@ class Queries extends CI_Controller
 
     public function save()
     {
+        $user = $this->session->userdata("user");
+
         /** Load Form Validation Library */
         $this->load->library("form_validation");
 
         /** Validation Rules */
-        $this->form_validation->set_rules("protocol", "Protokol", "trim|required");
-        $this->form_validation->set_rules("host", "ePosta Sunucu (Host)", "trim|required");
-        $this->form_validation->set_rules("port", "Port Numarası", "trim|required");
-        $this->form_validation->set_rules("user_name", "Gönderici Adı", "trim|required");
-        $this->form_validation->set_rules("password", "Sunucu Şifresi", "trim|required");
-        $this->form_validation->set_rules("user", "Sunucu Kullanıcı Adı", "trim|required|valid_email");
-        $this->form_validation->set_rules("from", "Kimden", "trim|required|valid_email");
-        $this->form_validation->set_rules("to", "Kime", "trim|required|valid_email");
+        $this->form_validation->set_rules("description", "Açıklama", "trim|required");
+        $this->form_validation->set_rules("query", "SQL", "trim|required");
 
         /** Translate Validation Messages */
         $this->form_validation->set_message(
             array(
                 "required" => "<b>{field}</b> alanı boş bırakılamaz...",
-                "valid_email" => "Lütfen geçerli bir ePosta adresi giriniz..."
             )
         );
 
@@ -72,20 +75,16 @@ class Queries extends CI_Controller
 
         /** If Validation Successful */
         if ($validate) {
-            /** Start Insert Statement */
 
-            $insert = $this->email_model->add(
+            /** Start Insert Statement */
+            $insert = $this->query_model->add(
                 array(
-                    "protocol" => $this->input->post("protocol"),
-                    "host" => $this->input->post("host"),
-                    "port" => $this->input->post("port"),
-                    "user_name" => $this->input->post("user_name"),
-                    "user" => $this->input->post("user"),
-                    "from" => $this->input->post("from"),
-                    "to" => $this->input->post("to"),
-                    "password" => $this->input->post("password"),
+                    "department_id" => $this->input->post("department_id"),
+                    "description" => $this->input->post("description"),
+                    "query" => strip_tags($this->input->post("query")),
                     "isActive" => 1,
-                    "createdAt" => date("Y-m-d H:i:s")
+                    "createdAt" => date("Y-m-d H:i:s"),
+                    "createdBy" => $user->id
                 )
             );
 
@@ -98,6 +97,8 @@ class Queries extends CI_Controller
                     "title" => "İşlem Başarılı",
                     "text" => "Kayıt başarılı bir şekilde eklendi.."
                 );
+
+                $this->session->set_flashdata("alert", $alert);
 
                 /** If Insert Statement Unsuccessful */
             } else {
@@ -112,7 +113,7 @@ class Queries extends CI_Controller
                 $this->session->set_flashdata("alert", $alert);
 
                 /** Redirect to Module's Add New Page */
-                redirect(base_url("emailsettings/new_form"));
+                redirect(base_url("queries/new_form"));
 
                 die();
 
@@ -121,7 +122,7 @@ class Queries extends CI_Controller
             $this->session->set_flashdata("alert", $alert);
 
             /** Redirect to Module's List Page */
-            redirect(base_url("emailsettings"));
+            redirect(base_url("queries"));
 
             die();
 
@@ -143,13 +144,22 @@ class Queries extends CI_Controller
 
     public function update_form($id)
     {
+        $user = $this->session->userdata("user");
+
         $viewData = new stdClass();
 
         /** Taking the specific row's data from the table */
-        $item = $this->email_model->get(
+        $item = $this->query_model->get(
             array(
                 "id" => $id
             )
+        );
+
+        $this->load->model("department_model");
+        $viewData->departments= $this->department_model->get_all(
+            array(
+                "isActive"  => 1
+            ), "title ASC"
         );
 
         /** Defining data to be sent to view */
@@ -163,24 +173,19 @@ class Queries extends CI_Controller
 
     public function update($id)
     {
+        $user = $this->session->userdata("user");
+
         /** Load Form Validation Library */
         $this->load->library("form_validation");
 
         /** Validation Rules */
-        $this->form_validation->set_rules("protocol", "Protokol", "trim|required");
-        $this->form_validation->set_rules("host", "ePosta Sunucu (Host)", "trim|required");
-        $this->form_validation->set_rules("port", "Port Numarası", "trim|required");
-        $this->form_validation->set_rules("user_name", "Gönderici Adı", "trim|required");
-        $this->form_validation->set_rules("password", "Sunucu Şifresi", "trim|required");
-        $this->form_validation->set_rules("user", "Sunucu Kullanıcı Adı", "trim|required|valid_email");
-        $this->form_validation->set_rules("from", "Kimden", "trim|required|valid_email");
-        $this->form_validation->set_rules("to", "Kime", "trim|required|valid_email");
+        $this->form_validation->set_rules("description", "Açıklama", "trim|required");
+        $this->form_validation->set_rules("query", "SQL", "trim|required");
 
         /** Translate Validation Messages */
         $this->form_validation->set_message(
             array(
                 "required" => "<b>{field}</b> alanı boş bırakılamaz...",
-                "valid_email" => "Lütfen geçerli bir ePosta adresi giriniz..."
             )
         );
 
@@ -192,18 +197,15 @@ class Queries extends CI_Controller
 
             /** Start Update Statement */
 
-            $update = $this->email_model->update(
+            $update = $this->query_model->update(
                 array(
                     "id" => $id),
                 array(
-                    "protocol" => $this->input->post("protocol"),
-                    "host" => $this->input->post("host"),
-                    "port" => $this->input->post("port"),
-                    "user_name" => $this->input->post("user_name"),
-                    "user" => $this->input->post("user"),
-                    "from" => $this->input->post("from"),
-                    "to" => $this->input->post("to"),
-                    "password" => $this->input->post("password")
+                    "department_id" => $this->input->post("department_id"),
+                    "description" => $this->input->post("description"),
+                    "query" => strip_tags($this->input->post("query")),
+                    "updatedAt" => date("Y-m-d H:i:s"),
+                    "updatedBy" => $user->id
                 )
             );
 
@@ -232,7 +234,7 @@ class Queries extends CI_Controller
             $this->session->set_flashdata("alert", $alert);
 
             /** Redirect to Module's List Page */
-            redirect(base_url("emailsettings"));
+            redirect(base_url("queries"));
 
             /** If Validation Unsuccessful */
 
@@ -241,7 +243,7 @@ class Queries extends CI_Controller
             $viewData = new stdClass();
 
             /** Taking the specific row's data from the table */
-            $item = $this->email_model->get(
+            $item = $this->query_model->get(
                 array(
                     "id" => $id
                 )
@@ -258,11 +260,10 @@ class Queries extends CI_Controller
         }
     }
 
-    public
-    function delete($id)
+    public function delete($id)
     {
         /** Starting Delete Statement */
-        $delete = $this->email_model->delete(
+        $delete = $this->query_model->delete(
             array(
                 "id" => $id
             )
@@ -293,18 +294,17 @@ class Queries extends CI_Controller
         $this->session->set_flashdata("alert", $alert);
 
         /** Redirect to Module's List Page */
-        redirect(base_url("emailsettings"));
+        redirect(base_url("queries"));
 
     }
 
-    public
-    function isActiveSetter($id)
+    public function isActiveSetter($id)
     {
         /** If the posted data is true then set the isActive variable's value 1 else set 0 */
         $isActive = ($this->input->post("data") === "true") ? 1 : 0;
 
         /** Update the isActive column with isActive varible's value */
-        $this->email_model->update(
+        $this->query_model->update(
             array(
                 "id" => $id
             ),
