@@ -15,7 +15,7 @@
                                 name="user_name"
                                 type="text"
                                 class="form-control"
-                                placeholder="Tercih ettiğiniz kullanıcı adını giriniz...">
+                                placeholder="Tercih edilen kullanıcı adını giriniz...">
                         <?php if (isset($form_error)) { ?>
                             <small class="input-form-error pull-right"> <?php echo form_error("user_name"); ?></small>
                         <?php } ?>
@@ -55,6 +55,16 @@
                         <?php if (isset($form_error)) { ?>
                             <small class="input-form-error pull-right"> <?php echo form_error("email"); ?></small>
                         <?php } ?>
+                    </div>
+                    <div class="form-group">
+                        <label>Kullanıcı Rolü</label>
+                        <div>
+                            <select class="form-control" data-plugin="select2" name="user_role_id">
+                                <?php foreach ($roles as $role) { ?>
+                                    <option value="<?php echo $role->id; ?>"><?php echo $role->title ; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Şifre</label>

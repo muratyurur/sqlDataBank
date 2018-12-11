@@ -1,3 +1,8 @@
+<?php
+$t = get_instance();
+
+$user = $t->session->userdata("user");
+?>
 <aside id="menubar" class="menubar light" style="padding-top: 0px;">
     <div class="menubar-scroll">
         <div class="menubar-scroll-inner">
@@ -30,20 +35,22 @@
                     </a>
                 </li>
 
-                <li class="has-submenu">
-                    <a class="submenu-toggle">
-                        <i class="menu-icon zmdi zmdi-accounts zmdi-hc-lg"></i>
-                        <span class="menu-text">Kullanıcı İşlemleri</span>
-                        <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
-                    </a>
-                    <ul class="submenu" id="user-submenu">
-                        <li><a href="<?php echo base_url("users"); ?>"><span class="menu-text">Kullanıcılar</span></a>
-                        </li>
-                        <li><a href="<?php echo base_url("user-roles"); ?>"><span
-                                        class="menu-text">Kullanıcı Rolleri</span></a></li>
-                    </ul>
-                </li>
-
+                <?php if ($user->user_role_id == 1) { ?>
+                    <li class="has-submenu">
+                        <a class="submenu-toggle">
+                            <i class="menu-icon zmdi zmdi-accounts zmdi-hc-lg"></i>
+                            <span class="menu-text">Kullanıcı İşlemleri</span>
+                            <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
+                        </a>
+                        <ul class="submenu" id="user-submenu">
+                            <li><a href="<?php echo base_url("users"); ?>"><span
+                                            class="menu-text">Kullanıcılar</span></a>
+                            </li>
+                            <li><a href="<?php echo base_url("user-roles"); ?>"><span
+                                            class="menu-text">Kullanıcı Rolleri</span></a></li>
+                        </ul>
+                    </li>
+                <?php } ?>
             </ul><!-- .app-menu -->
         </div><!-- .menubar-scroll-inner -->
     </div><!-- .menubar-scroll -->

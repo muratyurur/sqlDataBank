@@ -38,7 +38,7 @@
                     <a style="padding-right: 10px;" href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <div class="avatar avatar-md avatar-circle" style="margin-top: -8px; margin-right: 0px; top: -2px;">
                                 <img class="img-responsive"
-                                     src="<?php echo base_url("uploads/users_v/$user->img_url"); ?>"
+                                     src="<?php echo ($user->img_url != "") ? base_url("uploads/users_v/$user->img_url") : base_url("uploads/settings_v/nouserphoto.png"); ?>"
                                      alt="<?php echo base_url("uploads/users_v/$user->user_name"); ?>"
                                      style="display: inline; width: 40px; height: 40px;"
                                 />

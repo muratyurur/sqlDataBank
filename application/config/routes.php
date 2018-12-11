@@ -57,3 +57,4 @@ $route["login"] = "userop/login";
 $route["logout"] = "userop/logout";
 $route["sifremi-unuttum"] = "userop/forgot_password";
 $route["sifremi-sifirla"] = "userop/reset_password";
+$route["user-roles"] = "user_roles";

@@ -75,6 +75,22 @@ function get_departmentName($id)
     return($department->title);
 }
 
+function get_userRoleName($id)
+{
+    $t = &get_instance();
+
+    $t->load->model("user_role_model");
+
+    $department = $t->user_role_model->get(
+        array(
+            "id"        => $id,
+            "isActive"  => 1
+        )
+    );
+
+    return($department->title);
+}
+
 function send_email($toEmail = "", $subject = "", $message = "")
 {
     $t = get_instance();

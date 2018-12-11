@@ -82,15 +82,17 @@
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         <h4 class="modal-title"><?php echo get_departmentName($item->department_id); ?></h4>
                                         <p><?php echo $item->description; ?></p>
+                                        <button
+                                                type="button"
+                                                class="btn btn-success btn-sm pull-right"
+                                                data-clipboard-target="#query-<?php echo $item->id; ?>"
+                                                data-dismiss="modal">
+                                            <i class="fa fa-copy"></i>
+                                             Kopyala
+                                        </button>
                                     </div>
-
                                     <div class="modal-body">
                                         <pre><code class="sql hljs" id="query-<?php echo $item->id; ?>"><?php echo $item->query; ?></code></pre>
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-success" data-clipboard-target="#query-<?php echo $item->id; ?>">Kopyala</button>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
                                     </div>
                                 </div>
                             </div>

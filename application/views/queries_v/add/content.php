@@ -17,8 +17,8 @@
                                     <option value="<?php echo $department->id; ?>"><?php echo $department->title ; ?></option>
                                 <?php } ?>
                             </select>
-                        </div><!-- END column -->
-                    </div><!-- .form-group -->
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label>Açıklama</label>

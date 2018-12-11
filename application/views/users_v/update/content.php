@@ -74,6 +74,16 @@
                             <small class="input-form-error pull-right"> <?php echo form_error("email"); ?></small>
                         <?php } ?>
                     </div>
+                    <div class="form-group">
+                        <label>Kullanıcı Rolü</label>
+                        <div>
+                            <select class="form-control" data-plugin="select2" name="user_role_id">
+                                <?php foreach ($roles as $role) { ?>
+                                    <option value="<?php echo $role->id; ?>"><?php echo $role->title ; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-primary btn-md btn-outline"><i class="fa fa-refresh"></i>
                         Güncelle
                     </button>

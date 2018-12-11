@@ -36,6 +36,14 @@ class Users extends CI_Controller
     {
         $viewData = new stdClass();
 
+        $this->load->model("user_role_model");
+
+        $viewData->roles = $this->user_role_model->get_all(
+            array(
+                "isActive"  => 1
+            )
+        );
+
         /** Defining data to be sent to view */
         $viewData->viewFolder = $this->viewFolder;
         $viewData->subViewFolder = "add";
@@ -50,22 +58,6 @@ class Users extends CI_Controller
 
         /** Load Form Validation Library */
         $this->load->library("form_validation");
-
-        if ($_FILES["img_url"]["name"] == "") {
-            /** Set the notification is Error */
-            $alert = array(
-                "type" => "error",
-                "title" => "İşlem Başarısız",
-                "text" => "Lütfen bir görsel seçiniz.."
-            );
-
-            $this->session->set_flashdata("alert", $alert);
-
-            /** Redirect to Module's List Page */
-            redirect(base_url("users/new_form"));
-
-            die();
-        }
 
         /** Validation Rules */
         $this->form_validation->set_rules("user_name", "Kullanıcı Adı", "trim|required|is_unique[users.user_name]");
@@ -93,6 +85,9 @@ class Users extends CI_Controller
         if ($validate) {
             /** Start Insert Statement */
 
+
+            if ($_FILES["img_url"]["name"] == "") {
+
             /** Taking the name of uploaded file */
             $file_name = convertToSEO(pathinfo($_FILES["img_url"]["name"], PATHINFO_FILENAME)) . "." . pathinfo($_FILES["img_url"]["name"], PATHINFO_EXTENSION);
 
@@ -118,6 +113,7 @@ class Users extends CI_Controller
                         "full_name" => $this->input->post("full_name"),
                         "title" => $this->input->post("title"),
                         "email" => $this->input->post("email"),
+                        "user_role_id" => $this->input->post("user_role_id"),
                         "password" => md5($this->input->post("password")),
                         "img_url" => $uploaded_file,
                         "isActive" => 1,
@@ -125,6 +121,21 @@ class Users extends CI_Controller
                         "createdBy" => $user->id
                     )
                 );
+            } else {
+                $insert = $this->user_model->add(
+                    array(
+                        "user_name" => $this->input->post("user_name"),
+                        "full_name" => $this->input->post("full_name"),
+                        "title" => $this->input->post("title"),
+                        "email" => $this->input->post("email"),
+                        "user_role_id" => $this->input->post("user_role_id"),
+                        "password" => md5($this->input->post("password")),
+                        "isActive" => 1,
+                        "createdAt" => date("Y-m-d H:i:s"),
+                        "createdBy" => $user->id
+                    )
+                );
+            }
 
                 /** If Insert Statement Succesful */
                 if ($insert) {
@@ -197,6 +208,14 @@ class Users extends CI_Controller
     public function update_form($id)
     {
         $viewData = new stdClass();
+
+        $this->load->model("user_role_model");
+
+        $viewData->roles = $this->user_role_model->get_all(
+            array(
+                "isActive"  => 1
+            )
+        );
 
         /** Taking the specific row's data from the table */
         $item = $this->user_model->get(
@@ -286,13 +305,14 @@ class Users extends CI_Controller
                     $uploaded_file = $this->upload->data("file_name");
 
                     $data = array(
-                        "user_name" => $this->input->post("user_name"),
-                        "full_name" => $this->input->post("full_name"),
-                        "title"     => $this->input->post("title"),
-                        "email"     => $this->input->post("email"),
-                        "img_url"   => $uploaded_file,
-                        "updatedAt" => date("Y-m-d H:i:s"),
-                        "updatedBy" => $user->id
+                        "user_name"     => $this->input->post("user_name"),
+                        "full_name"     => $this->input->post("full_name"),
+                        "title"         => $this->input->post("title"),
+                        "email"         => $this->input->post("email"),
+                        "user_role_id"  => $this->input->post("user_role_id"),
+                        "img_url"       => $uploaded_file,
+                        "updatedAt"     => date("Y-m-d H:i:s"),
+                        "updatedBy"     => $user->id
                     );
 
                     /** If Upload Process is Unsuccesful */
@@ -316,6 +336,7 @@ class Users extends CI_Controller
                     "full_name" => $this->input->post("full_name"),
                     "title" => $this->input->post("title"),
                     "email" => $this->input->post("email"),
+                    "user_role_id"  => $this->input->post("user_role_id"),
                     "updatedAt" => date("Y-m-d H:i:s"),
                     "updatedBy" => $user->id
                 );
