@@ -59,19 +59,19 @@
         <div class="wrap-login100">
             <form class="login100-form" action="<?php echo base_url("userop/do_login"); ?>" method="post">
                 <span class="login100-form-title p-b-25">
-                        <span style="font-size: xx-large; color: #0089DD">
+                        <span style="font-size: xx-large; color: #505FB3">
                             <i class="fa fa-database fa-2x"></i>
                         </span>
 					</span>
                 <span class="login100-form-title p-b-5">
-                        <span style="font-size: xx-large; color: #0089DD">B<small class="text-muted">ilgi</small></span>
-                        <span style="font-size: xx-large; color: #0089DD"> İ<small
+                        <span style="font-size: xx-large; color: #505FB3">B<small class="text-muted">ilgi</small></span>
+                        <span style="font-size: xx-large; color: #505FB3"> İ<small
                                     class="text-muted">şlem</small></span>
-                        <span style="font-size: xx-large; color: #0089DD"> M<small
+                        <span style="font-size: xx-large; color: #505FB3"> M<small
                                     class="text-muted">üdürlüğü</small></span>
 					</span>
                 <span class="login100-form-title p-b-15">
-                        <span style="font-size: xx-large; color: #0089DD">SQL<small
+                        <span style="font-size: xx-large; color: #505FB3">SQL<small
                                     class="text-muted"> Veri Bankası</small></span>
 					</span>
                 <div class="wrap-input100">

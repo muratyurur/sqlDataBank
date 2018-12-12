@@ -37,7 +37,7 @@ $user = $t->session->userdata("user");
 
                 <?php if ($user->user_role_id == 1) { ?>
                     <li class="has-submenu">
-                        <a class="submenu-toggle">
+                        <a href="javascript:void(0)" class="submenu-toggle">
                             <i class="menu-icon zmdi zmdi-accounts zmdi-hc-lg"></i>
                             <span class="menu-text">Kullanıcı İşlemleri</span>
                             <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>

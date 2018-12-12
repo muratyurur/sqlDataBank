@@ -1,11 +1,11 @@
 <?php
 
-function convertToSEO($text)
-{
-    $turkce = array("ç", "Ç", "ğ", "Ğ", "ü", "Ü", "ö", "Ö", "ı", "İ", "ş", "Ş", ".", ",", "!", "'", "\"", " ", "?", "*", "_", "|", "=", "(", ")", "[", "]", "{", "}");
-    $convert = array("c", "c", "g", "g", "u", "u", "o", "o", "i", "i", "s", "s", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-");
-
-    return strtolower(str_replace($turkce, $convert, $text));
+function convertToSEO($deger) {
+    $turkce=array("ş","Ş","ı","(",")","'","&#39;"," - ","ü","Ü","ö","Ö","ç","Ç","!"," ","/","*","?","ş","Ş","ı","ğ","Ğ","İ","ö","Ö","Ç","ç","ü","Ü");
+    $duzgun=array("s","s","i","","","-","-","-","u","u","o","o","c","c","","-","-","-","","s","s","i","g","g","i","o","o","c","c","u","u");
+    $deger= str_replace($turkce,$duzgun,trim($deger));
+    $deger = preg_replace("@[^a-z0-9\-_]+@i","",$deger);
+    return mb_convert_case($deger,MB_CASE_LOWER);
 }
 
 function get_readable_date($date)
