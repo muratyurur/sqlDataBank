@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-md-12">
         <h4 class="m-b-lg">
-            Galeriler Listesi
+            Rapor Listesi
             <a class="btn btn-outline btn-info btn-sm pull-right"
-               href="<?php echo base_url("galleries/new_form"); ?>">
-                <i class="fa fa-plus"></i> Yeni Ekle
+               href="<?php echo base_url("reports/new_form"); ?>">
+                <i class="fa fa-plus"></i> Yeni Rapor Ekle
             </a>
         </h4>
     </div>
@@ -12,8 +12,8 @@
         <div class="widget p-lg">
             <?php if (empty($items)) { ?>
                 <div class="alert alert-warning text-center" style="padding: 8px; margin-bottom: 0px; s">
-                    <p style="font-size: larger">Bu tabloya ait herhangi bir veri bulunamadı. Eklemek için
-                        <a href="<?php echo base_url("galleries/new_form"); ?>">
+                    <p style="font-size: larger">Henüz hiçbir rapor eklenmemiş. Eklemek için
+                        <a href="<?php echo base_url("reports/new_form"); ?>">
                             tıklayın
                         </a>...
                     </p>
@@ -24,39 +24,23 @@
                     <thead>
                     <th class="w20"><i class="fa fa-reorder"></i></th>
                     <th class="w50">#id</th>
-                    <th>Galeri Adı</th>
-                    <th class="w100">Galeri Türü</th>
-                    <th>Klasör Adı</th>
+                    <th>Müdürlük</th>
+                    <th>Rapor Adı</th>
                     <th>url</th>
                     <th class="w75">Durumu</th>
                     <th class="w300">İşlem</th>
                     </thead>
-                    <tbody class="sortable" data-url="<?php echo base_url("galleries/rankSetter"); ?>">
+                    <tbody>
                     <?php foreach ($items as $item) { ?>
                         <tr id="ord-<?php echo $item->id; ?>">
                             <td class="text-center"><i class="fa fa-reorder"></i></td>
                             <td class="text-center"><?php echo $item->id; ?></td>
+                            <td class="text-center"><?php echo get_departmentName($item->department_id); ?></td>
                             <td class="text-center"><?php echo $item->title; ?></td>
-                            <td class="text-center" style="vertical-align: middle">
-                                <?php if ($item->gallery_type == "image") { ?>
-                                    <i class="fa fa-picture-o fa-3x" aria-hidden="true"></i>
-                                    <br>
-                                    <p class="text-muted" style="margin: 0px">Resim Galerisi</p>
-                                <?php } else if ($item->gallery_type == "video") { ?>
-                                    <i class="fa fa-youtube fa-3x" aria-hidden="true"></i>
-                                    <br>
-                                    <p class="text-muted" style="margin: 0px">Video Galerisi</p>
-                                <?php } else if ($item->gallery_type == "file") { ?>
-                                    <i class="fa fa-folder-open-o fa-3x" aria-hidden="true"></i>
-                                    <br>
-                                    <p class="text-muted" style="margin: 0px">Dosya Galerisi</p>
-                                <?php } ?>
-                            </td>
-                            <td class="text-center"><?php echo $item->folder_name; ?></td>
                             <td class="text-center"><?php echo $item->url; ?></td>
                             <td class="text-center">
                                 <input
-                                        data-url="<?php echo base_url("galleries/isActiveSetter/$item->id"); ?>"
+                                        data-url="<?php echo base_url("reports/isActiveSetter/$item->id"); ?>"
                                         class="isActive"
                                         type="checkbox"
                                         data-switchery
@@ -66,41 +50,23 @@
                             </td>
                             <td class="text-center">
                                 <button
-                                        data-url="<?php echo base_url("galleries/delete/$item->id"); ?>"
+                                        data-url="<?php echo base_url("reports/delete/$item->id"); ?>"
                                         type="button"
                                         class="btn btn-danger btn-sm btn-outline remove-btn"
                                 >
                                     <i class="fa fa-trash-o"></i>
                                     Sil
                                 </button>
-                                <a href="<?php echo base_url("galleries/update_form/$item->id"); ?>">
+                                <a href="<?php echo base_url("reports/update_form/$item->id"); ?>">
                                     <button type="button" class="btn btn-primary btn-sm btn-outline">
                                         <i class="fa fa-pencil-square-o"></i>
                                         Düzenle
                                     </button>
                                 </a>
-                                <?php
-                                if ($item->gallery_type == "image") {
-
-                                    $button_image = "fa-picture-o";
-                                    $button_url = "galleries/upload_form/$item->id";
-
-                                } else if ($item->gallery_type == "file") {
-
-                                    $button_image = "fa-folder-open-o";
-                                    $button_url = "galleries/upload_form/$item->id";
-
-                                } else if ($item->gallery_type == "video") {
-
-                                    $button_image = "fa-youtube";
-                                    $button_url = "galleries/gallery_video_list/$item->id";
-
-                                }
-                                ?>
-                                <a href="<?php echo base_url($button_url); ?>">
+                                <a href="<?php echo base_url("reports/upload_form/$item->id"); ?>">
                                     <button type="button" class="btn btn-inverse btn-sm btn-outline">
-                                        <i class="fa <?php echo $button_image; ?>"></i>
-                                        Galeri İçeriği
+                                        <i class="fa fa-folder-open-o"></i>
+                                        Rapor Dosyaları
                                     </button>
                                 </a>
                             </td>

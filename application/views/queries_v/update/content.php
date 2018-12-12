@@ -19,8 +19,8 @@
                                     </option>
                                 <?php } ?>
                             </select>
-                        </div><!-- END column -->
-                    </div><!-- .form-group -->
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label>Açıklama</label>
