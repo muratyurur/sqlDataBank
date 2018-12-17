@@ -156,6 +156,7 @@ class Queries extends CI_Controller
         );
 
         $this->load->model("department_model");
+
         $viewData->departments= $this->department_model->get_all(
             array(
                 "isActive"  => 1
@@ -203,7 +204,7 @@ class Queries extends CI_Controller
                 array(
                     "department_id" => $this->input->post("department_id"),
                     "description" => $this->input->post("description"),
-                    "query" => strip_tags($this->input->post("query")),
+                    "query" => $this->input->post("query"),
                     "updatedAt" => date("Y-m-d H:i:s"),
                     "updatedBy" => $user->id
                 )

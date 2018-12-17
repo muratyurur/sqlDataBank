@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <h4 class="m-b-lg">
-            <b><?php echo get_departmentName($item->deparment_id); ?></b> müdürlüğüne ait bir sorguyu düzenliyorsunuz...
+            <b><?php echo get_departmentName($item->department_id); ?></b> müdürlüğüne ait bir sorguyu düzenliyorsunuz...
         </h4>
     </div>
     <div class="col-md-12">

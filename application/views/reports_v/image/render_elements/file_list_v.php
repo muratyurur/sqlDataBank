@@ -25,11 +25,11 @@
                 <td><?php echo $item->url; ?></td>
                 <td class="text-center">
                     <input
-                        data-url="<?php echo base_url("reports/fileIsActiveSetter/$item->id"); ?>"
-                        class="isActive"
-                        type="checkbox"
-                        data-switchery
-                        data-color="#188ae2"
+                            data-url="<?php echo base_url("reports/fileIsActiveSetter/$item->id"); ?>"
+                            class="isActive"
+                            type="checkbox"
+                            data-switchery
+                            data-color="#188ae2"
                         <?php echo ($item->isActive) ? "checked" : "" ?>
                     />
                 </td>
@@ -42,13 +42,15 @@
                         <i class="fa fa-trash-o"></i>
                         Sil
                     </button>
-                    <button
-                            type="button"
-                            class="btn btn-primary btn-sm btn-outline remove-btn"
-                    >
-                        <i class="fa fa-download"></i>
-                        İndir
-                    </button>
+                    <a target="_blank" href="<?php echo base_url($item->url); ?>">
+                        <button
+                                type="button"
+                                class="btn btn-primary btn-sm btn-outline"
+                        >
+                            İndir
+                            <i class="pl-10 fa fa-download"></i>
+                        </button>
+                    </a>
                 </td>
             </tr>
         <?php } ?>
